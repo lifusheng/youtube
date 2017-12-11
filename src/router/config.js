@@ -26,6 +26,11 @@ export default [
         name:"登录"
     },
     {
+        path: '/register',
+        component: load('user/register'),
+        name:"注册"
+    },
+    {
         path: '/user',
         component: load('user/index'),
         name:"用户中心"

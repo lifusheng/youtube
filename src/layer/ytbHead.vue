@@ -7,6 +7,7 @@
                 </a>
             </div>
             <div class="head-right">
+                <input type="text" class="search-input" placeholder="搜索">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </div>
         </header>

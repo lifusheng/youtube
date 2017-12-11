@@ -87,6 +87,20 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+      port: 8089,
+      historyApiFallback: true,
+      stats: 'minimal',  // 输入精简信息
+      overlay: true, // 将错误显示在html之上
+      proxy: {
+          '/api': {
+              target: 'http://localhost:9999',
+              secure: false,
+              changeOrigin: true,
+              // pathRewrite: {'^/api': ''},
+          }
+      }
+  },
   plugins: [
       new webpack.DefinePlugin({
           GLOBAL:{

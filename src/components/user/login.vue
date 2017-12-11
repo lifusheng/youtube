@@ -32,6 +32,11 @@
                 <button class="btn error big" style="width: 100%;">
                     登录
                 </button>
+                <a href="#/register">
+                    <button class="btn big register" style="width: 100%;">
+                        去注册
+                    </button>
+                </a>
             </div>
         </div>
     </div>
