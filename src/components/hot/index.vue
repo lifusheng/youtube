@@ -10,6 +10,6 @@
 </template>
 
 <script>
-    export default {
-    }
+    import hot from 'js/hot/index'
+    export default hot
 </script>

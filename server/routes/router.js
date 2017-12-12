@@ -8,10 +8,10 @@ let api = require('../api');
 let router = express.Router();
 
 
-
-
 // user
 router.get(api.userList, user.fetchAll);
+router.post(api.userRegister, user.register);
+router.post(api.userLogin, user.login);
 
 // router.post(api.userChangeRole, user.controlVisit, user.changeRole); // 更改权限
 // router.post(api.goodsUploadImg, upload.single('avatar'),goods.uploadGoodsImg); // 图片上传

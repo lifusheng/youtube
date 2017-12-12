@@ -8,7 +8,7 @@
                <i class="fa fa-user-o" aria-hidden="true"></i>
                <div class="account-input flex">
                    <label for="inputid1" class="c-input">
-                       <input type="text" placeholder="请输入用户账号" id="inputid1">
+                       <input type="text" placeholder="请输入用户账号"  v-model="username" id="inputid1">
                    </label>
                </div>
            </div>
@@ -16,7 +16,7 @@
                 <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                <div class="account-input flex">
                    <label for="inputid2" class="c-input">
-                       <input type="text" placeholder="请输入密码" id="inputid2">
+                       <input type="text" placeholder="请输入密码" v-model="pwd" id="inputid2">
                    </label>
                </div>
            </div>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="loading-x">
-                <button class="btn error big" style="width: 100%;">
+                <button class="btn error big" style="width: 100%;" @click="submit()">
                     登录
                 </button>
                 <a href="#/register">
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-    export default {
-
-    }
+    import login from 'js/user/login'
+    export default login
 </script>

@@ -18,7 +18,7 @@ export default [
     {
         path: '/nologin',
         component: load('user/nologin'),
-        name:"用户中心"
+        name:"未登录"
     },
     {
         path: '/login',
@@ -33,11 +33,13 @@ export default [
     {
         path: '/user',
         component: load('user/index'),
+        meta: {login: true},
         name:"用户中心"
     },
     {
         path: '/history',
         component: load('user/history/index'),
+        meta: {login: true},
         name:"历史记录"
     },
     {

@@ -7,8 +7,16 @@ Vue.use(Router)
 const routes= new Router({
         routes: routeConfig
 })
-routes.beforeEach(function (to, from, next) {
-        next()
+routes.beforeEach((to, from, next)=> {
+    const condition = to.matched[0].meta.login && !window.localStorage.tk && to.path != '/login';
+    console.log(!this.isLogin);
+    if (condition) {
+        return next('/login')
+    }
+    if (window.localStorage.tk && to.path == '/login') { //登录状态下，不能进入登录界面
+        return next('/home')
+    }
+     next()
 })
 
 

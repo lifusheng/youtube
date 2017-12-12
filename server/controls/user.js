@@ -1,7 +1,7 @@
 let sql = require('../sql/sql');
 let moment = require('moment');
 let bcrypt = require('bcryptjs');
-let func = require('../sql/func');
+let conn = require('../sql/conn');
 
 function formatData(rows) {
     return rows.map(row => {
@@ -28,45 +28,72 @@ function formatData(rows) {
 module.exports = {
 
     fetchAll (req, res) {
-        func.connPool(sql.queryAll, 't_user', rows => {
+        conn.connPool(sql.queryAll, 't_user', rows => {
             // rows = formatData(rows);
             console.log(rows,'rows');
-
             res.json({code: 200, msg: 'ok', users: rows});
         });
 
     },
-
+    uniqRnd(start, end){
+        return Math.floor(Math.random() * (end - start) + start);
+    },
     // 添加用户
-    addOne (req, res) {
+    register (req, res) {
+        const timestamp = (new Date()).valueOf();
+        const userid=timestamp;
+        // 密码加盐
         let name = req.body.name;
         let pass = req.body.pass;
-        let role = req.body.role;
-        let query = 'INSERT INTO user(user_name, password, role) VALUES(?, ?, ?)';
-
-        // 密码加盐
-        bcrypt.hash(pass, 10, (err, hash) => {
-            if (err) console.log(err);
-
-            pass = hash;
-
-            let arr = [name, pass, role];
-
-            func.connPool(query, arr, rows => {
-                res.json({code: 200, msg: 'done'});
+        conn.connPool(sql.login, [name], rows => {
+            if (rows.length) {
+                res.json({code: 400, msg: '用户名已存在'});return;
+            }
+            bcrypt.genSalt(8, function(err, salt) {
+                bcrypt.hash(pass, salt, function(err, hash) {
+                    if (err) console.log(err);
+                    const data  = {id: '', name: req.body.name,pwd:hash,userid:userid,subname:'',pic:'',regtime:timestamp,lasttime:''};
+                    conn.connPool(sql.insertUserTb, data, rows => {
+                        res.json({code: 200, msg: 'ok'});
+                    });
+                });
             });
+        });
+    },
+    // 登录
+    login (req, res) {
+        let username = req.body.name;
+        let pass = req.body.pass;
 
+        conn.connPool(sql.login, [username], rows => {
+            if (!rows.length) {
+                res.json({code: 400, msg: '用户名不存在'});
+                return;
+            }
+            let password = rows[0].pwd;
+            bcrypt.compare(pass, rows[0].pwd, function(err, result) {
+                if (result) {
+                    let user = {
+                        userid: rows[0].userid,
+                        username: rows[0].name,
+                        pic: rows[0].pic
+                    };
+                    req.session.login = user;
+                    res.json({code: 200, msg: '登录成功', data: user});
+                } else {
+                    res.json({code: 400, msg: '密码错误'});
+                }
+            });
         });
 
     },
-
 
     // 删除用户
     deleteOne (req, res) {
 
         let id = req.body.id;
 
-        func.connPool(sql.del, ['user', id], rows => {
+        conn.connPool(sql.del, ['user', id], rows => {
             res.json({code: 200, msg: 'done'});
         });
 
@@ -76,44 +103,13 @@ module.exports = {
     deleteMulti (req, res) {
         let id = req.body.id;
 
-        func.connPool('DELETE FROM user WHERE id IN ?', [[id]], rows => {
+        conn.connPool('DELETE FROM user WHERE id IN ?', [[id]], rows => {
             res.json({code: 200, msg: 'done'});
         });
 
     },
 
-    // 登录
-    login (req, res) {
-        let user_name = req.body.user_name;
-        let pass = req.body.pass;
 
-        func.connPool('SELECT * from user where user_name = ?', [user_name], rows => {
-
-            if (!rows.length) {
-                res.json({code: 400, msg: '用户名不存在'});
-                return;
-            }
-
-            let password = rows[0].password;
-            bcrypt.compare(pass, password, (err, sure) => {
-                if (sure) {
-                    let user = {
-                        user_id: rows[0].user_id,
-                        user_name: rows[0].user_name,
-                        role: rows[0].role,
-                    };
-
-                    req.session.login = user;
-
-                    res.json({code: 200, msg: '登录成功', user: user});
-                } else {
-                    res.json({code: 400, msg: '密码错误'});
-                }
-            });
-
-        });
-
-    },
 
 
     // 自动登录
@@ -155,7 +151,7 @@ module.exports = {
 
         let user_id = req.body.id;
 
-        func.connPool('UPDATE user SET role= ? WHERE id = ?', [change_role, user_id], rows => {
+        conn.connPool('UPDATE user SET role= ? WHERE id = ?', [change_role, user_id], rows => {
             console.log(rows);
             if (rows.affectedRows) {
                 res.json({code: 200, msg: 'done'});
