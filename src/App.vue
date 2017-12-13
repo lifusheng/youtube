@@ -7,5 +7,6 @@
 </template>
 <style lang="scss">
   @import "styles/common.scss";
+  @import "styles/play.scss";
   @import "../static/scss/font-awesome.scss";
 </style>

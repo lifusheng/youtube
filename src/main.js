@@ -16,7 +16,6 @@ Vue.prototype.ajax = ajax;
 Vue.prototype.isLogin = false;  //是否登录
 Vue.config.productionTip = false
 
-console.log(ajax)
 /* eslint-disable no-new */
 export default new Vue({
   el: '#app',

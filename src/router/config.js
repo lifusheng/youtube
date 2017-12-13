@@ -37,6 +37,11 @@ export default [
         name:"用户中心"
     },
     {
+        path: '/video',
+        component: load('play/video'),
+        name:"视频播放"
+    },
+    {
         path: '/history',
         component: load('user/history/index'),
         meta: {login: true},

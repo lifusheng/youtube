@@ -1,0 +1,42 @@
+
+
+@import "vars.scss";
+
+.center{
+  position: absolute;
+  left: 50%;top:50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.js-paly-section{
+    background-color: $desc-fc;
+    .video-wrap{
+      position: relative;
+      text-align: center;
+      margin-top: 5vh;
+      padding-top: 5vh;
+      video{
+        border-radius: 0.3rem;
+        width: 80vw;
+        &::-internal-media-controls-download-button {
+          display:none;
+        }
+        &::-webkit-media-controls-enclosure {
+          overflow:hidden;
+        }
+        &::-webkit-media-controls-panel {
+          width: calc(100% + 30px);
+        }
+      }
+      .add{
+        width: 60%;
+        height: 40%;
+      }
+      .btn{
+         width: 10vw;
+         height: 10vw;
+      }
+    }
+}

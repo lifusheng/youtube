@@ -9,7 +9,6 @@ const routes= new Router({
 })
 routes.beforeEach((to, from, next)=> {
     const condition = to.matched[0].meta.login && !window.localStorage.tk && to.path != '/login';
-    console.log(!this.isLogin);
     if (condition) {
         return next('/login')
     }
@@ -19,17 +18,6 @@ routes.beforeEach((to, from, next)=> {
      next()
 })
 
-
-// routes.beforeEach(function(to, from, next){
-//     // if(to.matched[0].meta.login&&!window.localStorage.tk&&to.path!='/user/login'){
-//     //     return next('/user/login')
-//     // }
-//     // if(window.localStorage.tk && to.path=='/user/login'){ //登录状态下，不能进入登录界面
-//     //     return next('/home')
-//     // }
-//    next()
-// })
-//
 routes.afterEach(function (route) {
     document.title=route.name;
 })

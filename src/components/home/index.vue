@@ -4,7 +4,7 @@
     <div class="guideBox">
         <c-header></c-header>
         <div class="js-index-section">
-            <div class="layer-page video-item">
+            <div class="layer-page video-item" @click="gotoPlay()">
                 <div>
                     <img src="/static/images/video/hq720.jpg" alt="">
                 </div>
@@ -61,12 +61,6 @@
 </template>
 
 <script>
-    export default {
-        name: 'index',
-        data () {
-            return {
-                msg: 'index'
-            }
-        }
-    }
+    import home from 'js/home/index'
+    export default home
 </script>
