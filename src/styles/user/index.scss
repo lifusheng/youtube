@@ -1,0 +1,41 @@
+
+@import "../vars.scss";
+
+.js-userself-admin-section{
+  .user-info-wrap{
+    background-color: $usrbg;
+    height: 10vh;
+    .user-log{
+      height: 10vh;
+      line-height: 10vh;
+      img{
+        height: 5vh;
+        border-radius: 50%;
+        vertical-align:middle;
+      }
+      h1{
+        display: inline-block;
+        color: white;
+      }
+    }
+  }
+  .admin-nav{
+    background-color: #F6F6F6;
+    padding-top: 1rem;
+    .nav{
+      display: flex;
+      justify-content: space-between;
+      div{
+        flex: 1;
+        height: 2rem;
+        text-align: center;
+        border-bottom: 4px solid transparent;
+        &.active{
+          border-bottom-color: $bg;
+        }
+      }
+    }
+
+  }
+}
+

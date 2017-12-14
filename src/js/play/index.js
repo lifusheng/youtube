@@ -20,7 +20,6 @@ export default {
         //视频一播放就隐藏广告，一暂停就显示广告
         v7.onplay = function(){
             ad.style.display = 'none';
-            btn.src = '/static/images/video/pause.png';
             let t=setTimeout(()=>{
                 clearTimeout(t);
                 btn.style.display = 'none';
@@ -29,7 +28,7 @@ export default {
         v7.onpause = function(){
             ad.style.display = 'block';
             btn.style.display = 'block';
-            btn.src = '/static/images/video/play.png';
+            // btn.src = '/static/images/video/play.png';
         }
         this.ajax.ajaxPost(this.api.palyVideoUrl,{vid:'124345456475672'}).then( res => {
             // if(res.code!=200){this.$msg.warning('获取视频失败，'+res.msg);return;}

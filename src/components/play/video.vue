@@ -10,7 +10,8 @@
                     您的浏览器不支持VIDEO标签！
                 </video>
                 <img src="/static/images/video/ad.jpg"  id='ad' class="add center">
-                <img src="/static/images/video/play.png" id="btn"  class="btn center" @click="palyBtn()"/>
+                <i class="fa fa-play btn center" aria-hidden="true" id="btn"   @click="palyBtn()"></i>
+                <!--<img src="/static/images/video/play.png" id="btn"  class="btn center" @click="palyBtn()"/>-->
             </div>
         </div>
     </div>

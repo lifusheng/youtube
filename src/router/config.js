@@ -42,6 +42,12 @@ export default [
         name:"视频播放"
     },
     {
+        path: '/userAdmin',
+        meta: {login: true},
+        component: load('user/admin/index'),
+        name:"个人信息"
+    },
+    {
         path: '/history',
         component: load('user/history/index'),
         meta: {login: true},

@@ -23,7 +23,7 @@ module.exports = {
             };
             res.json({code: 200, data: data});
         })
-    },
+    }
 
 
 };
