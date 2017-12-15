@@ -16,7 +16,11 @@ export default {
         })
     },
     ajaxPost (api, post, cb) {
-       return axios.post(api, post).then(res=>{
+       return axios.post(api, post, {
+           headers: {
+               "Content-Type": "multipart/form-data"
+           }
+       }).then(res=>{
                 const data = res.data;
                 if (data.code == 200) {
                     return data;

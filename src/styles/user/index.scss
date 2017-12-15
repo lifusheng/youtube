@@ -35,7 +35,62 @@
         }
       }
     }
-
   }
+  .item-wrap{
+    border-bottom: 1px solid $border-fc;
+    .file-wrap{
+      padding: 4vh 0;
+
+      .img{
+        margin-left: 50%;
+        -webkit-transform: translate(-50%,0);
+        -ms-transform: translate(-50%,0);
+        -o-transform: translate(-50%,0);
+        transform: translate(-50%,0);
+        img{
+          border-radius: 50%;
+          width: 20vw;
+          height: 20vw;
+        }
+        &>span{
+          height: 20vw;
+          line-height: 20vw;
+          display: inline-block;
+          vertical-align: top;
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+        button{
+          height: 1.5rem;
+          width: 100%;
+          margin-left: 50%;
+          transform: translate(-50%,0);
+          background-color: $usrbg;
+          border: none;
+          border-radius: 3px;
+          display: block;
+          text-align: center;
+          margin-top: 3vh;
+          i{
+            font-size: 1.5rem;
+            color: white;
+          }
+        }
+        p{
+          margin: 0;
+          padding: 0;
+          span{
+            color: $desc-fc;
+            font-size: 0.8rem;
+            &.ui-color-red{
+              color: $bg;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
 }
 

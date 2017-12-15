@@ -87,7 +87,6 @@ module.exports = {
         });
 
     },
-
     // 删除用户
     deleteOne (req, res) {
 
@@ -108,9 +107,6 @@ module.exports = {
         });
 
     },
-
-
-
 
     // 自动登录
     autoLogin (req, res) {

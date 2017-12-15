@@ -54,6 +54,11 @@ export default [
         name:"历史记录"
     },
     {
+        path: '/test',
+        component: load('test'),
+        name:"test"
+    },
+    {
         path: '/b',
         component: load('b'),
         name:"b"
